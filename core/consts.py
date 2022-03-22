@@ -1,2 +1,2 @@
 class GameConsts:
-    FPS_CAP = 1200
+    FPS_CAP = 120
