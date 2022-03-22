@@ -2,12 +2,12 @@ import pygame as pg
 import time
 from core.render.consts import WindowConsts
 from core.consts import GameConsts
-from core.render.window import Window
+from core.render.display import Display
 
 
 class Game:
     def __init__(self):
-        self.window = Window(WindowConsts.WINDOW_WIDTH, WindowConsts.WINDOW_HEIGHT, "")
+        self.display = Display(WindowConsts.WINDOW_WIDTH, WindowConsts.WINDOW_HEIGHT, "")
         self.is_running = False
 
         self.clock = pg.time.Clock()
@@ -16,7 +16,7 @@ class Game:
     def init(self):
         pg.init()
 
-        self.window.init()
+        self.display.init()
 
         self.is_running = True
 
@@ -29,8 +29,8 @@ class Game:
             prev_time = self.calculate_delta_time(prev_time)
             self.handle_events(pg.event.get())
 
-            self.window.update_window_caption(str(int(self.clock.get_fps())))
-            self.window.update()
+            self.display.update_display_caption(str(int(self.clock.get_fps())))
+            self.display.update()
 
         self.quit()
 

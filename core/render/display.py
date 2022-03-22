@@ -1,12 +1,12 @@
 import pygame as pg
 
 
-class Window:
-    def __init__(self, screen_width, screen_height, screen_caption_text):
+class Display:
+    def __init__(self, screen_width, screen_height, display_caption_text):
         self.screen_width = screen_width
         self.screen_height = screen_height
 
-        self.screen_caption_text = screen_caption_text
+        self.display_caption_text = display_caption_text
 
         self.display = None
         self.window = None
@@ -17,11 +17,11 @@ class Window:
         self.display = pg.display
 
         self.window = self.display.set_mode((self.screen_width, self.screen_height))
-        self.display.set_caption(self.screen_caption_text)
+        self.display.set_caption(self.display_caption_text)
 
         self.frame = pg.Surface((self.screen_width, self.screen_height))
 
-    def update_window_caption(self, caption_text):
+    def update_display_caption(self, caption_text):
         self.display.set_caption(caption_text)
 
     def update_frame(self):
