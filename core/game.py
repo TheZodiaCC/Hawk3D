@@ -4,6 +4,8 @@ from core.render.consts import WindowConsts
 from core.consts import GameConsts
 from core.render.display import Display
 
+from core.render.objects.hello_triangle import HelloTriangle
+
 
 class Game:
     def __init__(self):
@@ -12,6 +14,8 @@ class Game:
 
         self.clock = pg.time.Clock()
         self.delta_time = 0
+
+        self.world_objects = []
 
     def init(self):
         pg.init()
@@ -23,6 +27,10 @@ class Game:
     def mainloop(self):
         prev_time = time.time()
 
+        # Tests
+        self.world_objects.append(HelloTriangle())
+        #
+
         while self.is_running:
             self.clock.tick(GameConsts.FPS_CAP)
 
@@ -30,7 +38,8 @@ class Game:
             self.handle_events(pg.event.get())
 
             self.display.update_display_caption(str(int(self.clock.get_fps())))
-            self.display.update()
+
+            self.display.update(self.world_objects)
 
         self.quit()
 
@@ -51,4 +60,7 @@ class Game:
         self.mainloop()
 
     def quit(self):
+        if self.display is not None:
+            self.display.close()
+
         pg.quit()
