@@ -13,7 +13,7 @@ class CubeMesh(MeshBase):
         self.model_transform = pyrr.matrix44.create_identity(dtype=np.float32)
 
         # x, y, z, r, g, b
-        self.vertices = (
+        self.vertices = np.array((
             -0.5, -0.5, -0.5, 1, 1, 1,
             0.5, -0.5, -0.5, 1, 1, 1,
             0.5, 0.5, -0.5, 1, 1, 1,
@@ -61,13 +61,19 @@ class CubeMesh(MeshBase):
             0.5, 0.5, 0.5, 1, 1, 1,
             -0.5, 0.5, 0.5, 1, 1, 1,
             -0.5, 0.5, -0.5, 1, 1, 1,
-        )
+        ), dtype=np.float32)
 
         self.vertices_count = int(len(self.vertices) / 6)
-        self.vertices = np.array(self.vertices, dtype=np.float32)
 
+        self.vao = None
+        self.vbo = None
+
+        self.init_gl()
+
+    def init_gl(self):
         self.vao = GL.glGenVertexArrays(1)
         GL.glBindVertexArray(self.vao)
+
         self.vbo = GL.glGenBuffers(1)
 
         GL.glBindBuffer(GL.GL_ARRAY_BUFFER, self.vbo)
