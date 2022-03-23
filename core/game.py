@@ -38,8 +38,13 @@ class Game:
             self.handle_events(pg.event.get())
 
             self.world_objects[0].eulers[2] += 10 * self.delta_time
+            self.world_objects[0].eulers[0] += 10 * self.delta_time
+
             if self.world_objects[0].eulers[2] > 360:
                 self.world_objects[0].eulers[2] -= 360
+
+            if self.world_objects[0].eulers[0] > 360:
+                self.world_objects[0].eulers[0] -= 360
 
             self.display.update_display_caption(str(int(self.clock.get_fps())))
 

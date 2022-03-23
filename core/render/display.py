@@ -31,6 +31,12 @@ class Display:
         GL.glClearColor(0, 0, 0, 1)
         GL.glEnable(GL.GL_DEPTH_TEST)
 
+        # Wireframe mode
+        GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE)
+
+        # Normal mode
+        # GL.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_FILL)
+
         self.init_shader()
         self.init_projections()
 
