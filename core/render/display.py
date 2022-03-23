@@ -59,33 +59,14 @@ class Display:
 
     def render_objects(self, objects):
         for object in objects:
-            mesh = object.mesh
-
             GL.glUseProgram(self.shader)
 
-            model_transform = pyrr.matrix44.create_identity(dtype=np.float32)
-            """
-                pitch: rotation around x axis
-                roll:rotation around z axis
-                yaw: rotation around y axis
-            """
-            model_transform = pyrr.matrix44.multiply(
-                m1=model_transform,
-                m2=pyrr.matrix44.create_from_eulers(
-                    eulers=np.radians(object.eulers), dtype=np.float32
-                )
-            )
-            model_transform = pyrr.matrix44.multiply(
-                m1=model_transform,
-                m2=pyrr.matrix44.create_from_translation(
-                    vec=np.array(object.position), dtype=np.float32
-                )
-            )
+            object.mesh.update()
 
-            GL.glUniformMatrix4fv(self.model_matrix_location, 1, GL.GL_FALSE, model_transform)
+            GL.glUniformMatrix4fv(self.model_matrix_location, 1, GL.GL_FALSE, object.mesh.model_transform)
 
-            GL.glBindVertexArray(mesh.vao)
-            GL.glDrawArrays(GL.GL_TRIANGLES, 0, mesh.vertices_count)
+            GL.glBindVertexArray(object.mesh.vao)
+            GL.glDrawArrays(GL.GL_TRIANGLES, 0, object.mesh.vertices_count)
 
     def init_shader(self):
         fragment_data = utils.load_shader("core/render/shaders/fragment.frag")

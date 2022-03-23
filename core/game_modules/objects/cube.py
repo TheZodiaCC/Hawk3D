@@ -8,4 +8,4 @@ class Cube(ObjectBase):
         self.position = np.array(position, dtype=np.float32)
         self.eulers = np.array(eulers, dtype=np.float32)
 
-        self.mesh = CubeMesh()
+        self.mesh = CubeMesh(self.position, self.eulers)
