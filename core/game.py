@@ -4,7 +4,7 @@ from core.render.consts import WindowConsts
 from core.consts import GameConsts
 from core.render.display import Display
 
-from core.render.objects.hello_triangle import HelloTriangle
+from core.game_modules.objects.cube import Cube
 
 
 class Game:
@@ -28,7 +28,7 @@ class Game:
         prev_time = time.time()
 
         # Tests
-        self.world_objects.append(HelloTriangle())
+        self.world_objects.append(Cube(position=[0, 0, -3], eulers=[0, 0, 0]))
         #
 
         while self.is_running:
@@ -36,6 +36,10 @@ class Game:
 
             prev_time = self.calculate_delta_time(prev_time)
             self.handle_events(pg.event.get())
+
+            self.world_objects[0].eulers[2] += 10 * self.delta_time
+            if self.world_objects[0].eulers[2] > 360:
+                self.world_objects[0].eulers[2] -= 360
 
             self.display.update_display_caption(str(int(self.clock.get_fps())))
 
