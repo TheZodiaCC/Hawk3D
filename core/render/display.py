@@ -42,7 +42,7 @@ class Display:
 
     def init_projections(self):
         projection_transform = pyrr.matrix44.create_perspective_projection(
-            fovy=45, aspect=640 / 480,
+            fovy=45, aspect=self.screen_width / self.screen_height,
             near=0.1, far=10, dtype=np.float32
         )
 
