@@ -70,7 +70,12 @@ class CubeMesh(MeshBase):
         GL.glBufferData(GL.GL_ARRAY_BUFFER, self.vertices.nbytes, self.vertices, GL.GL_STATIC_DRAW)
 
         GL.glEnableVertexAttribArray(0)
+        # vertexPos location in vertex shader | vertices count | FLOAT | FALSE | number fo bytes (6 x 4 bytes) |
+        # buffer stride in bytes
         GL.glVertexAttribPointer(0, 3, GL.GL_FLOAT, GL.GL_FALSE, 24, ctypes.c_void_p(0))
+
+        # vertexColor location in vertex shader | colors count | FLOAT | FALSE | number fo bytes (6 x 4 bytes) |
+        # buffer stride in bytes
 
         GL.glEnableVertexAttribArray(1)
         GL.glVertexAttribPointer(1, 3, GL.GL_FLOAT, GL.GL_FALSE, 24, ctypes.c_void_p(12))
