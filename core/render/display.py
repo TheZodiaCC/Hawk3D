@@ -1,3 +1,4 @@
+from core.render.consts import RenderConsts
 import pygame as pg
 import OpenGL.GL as GL
 from core.render import utils
@@ -75,8 +76,8 @@ class Display:
             GL.glDrawArrays(GL.GL_TRIANGLES, 0, object.mesh.vertices_count)
 
     def init_shader(self):
-        fragment_data = utils.load_shader("core/render/shaders/fragment.frag")
-        vertex_data = utils.load_shader("core/render/shaders/vertex.vert")
+        fragment_data = utils.load_shader(RenderConsts.FRAGMENT_SHADER_DATA_PATH)
+        vertex_data = utils.load_shader(RenderConsts.VERTEX_SHADER_DATA_PATH)
 
         self.shader = utils.compile_shader(vertex_data, fragment_data)
 
