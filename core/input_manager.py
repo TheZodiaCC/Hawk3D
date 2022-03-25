@@ -22,7 +22,11 @@ class InputManager:
             if self.is_mouse_locked:
                 (x, y) = pg.mouse.get_pos()
 
-                self.game.camera.update_direction(2 * (self.game.display.screen_width / 2 - x) * self.game.delta_time)
+                camera_vertical_direction = 2 * (self.game.display.screen_height / 2 - y)
+                camera_horizontal_direction = 2 * (self.game.display.screen_width / 2 - x)
+
+                self.game.camera.update_direction(camera_horizontal_direction * self.game.delta_time,
+                                                  camera_vertical_direction * self.game.delta_time)
 
                 pg.mouse.set_pos(self.game.display.screen_width / 2, self.game.display.screen_height / 2)
 
@@ -30,16 +34,22 @@ class InputManager:
         key = pg.key.get_pressed()
 
         if key[pg.K_w]:
-            self.game.camera.move(0, self.game.delta_time)
+            self.game.camera.move_horizontal(0, self.game.delta_time)
 
         if key[pg.K_s]:
-            self.game.camera.move(180, self.game.delta_time)
+            self.game.camera.move_horizontal(180, self.game.delta_time)
 
         if key[pg.K_a]:
-            self.game.camera.move(90, self.game.delta_time)
+            self.game.camera.move_horizontal(90, self.game.delta_time)
 
         if key[pg.K_d]:
-            self.game.camera.move(-90, self.game.delta_time)
+            self.game.camera.move_horizontal(-90, self.game.delta_time)
+
+        if key[pg.K_LSHIFT]:
+            self.game.camera.move_vertical(1, self.game.delta_time)
+
+        if key[pg.K_LCTRL]:
+            self.game.camera.move_vertical(-1, self.game.delta_time)
 
     def handle_buttons(self, key):
         if key == pg.K_ESCAPE:

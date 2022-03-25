@@ -11,22 +11,34 @@ class Camera:
         self.movement_speed = 1
 
         self.theta = 0
+        self.phi = 0
+
         self.forward_vector = np.array([0, 0, 0], dtype=np.float32)
         self.up_vector = np.array([0, 0, 1], dtype=np.float32)
 
-    def move(self, direction, dt):
+    def move_horizontal(self, direction, dt):
         move_direction = (direction + self.theta) % 360
 
         self.position[0] += self.movement_speed * np.cos(np.radians(move_direction), dtype=np.float32) * dt
         self.position[1] += self.movement_speed * np.sin(np.radians(move_direction), dtype=np.float32) * dt
 
-    def update_direction(self, direction):
-        self.theta = (self.theta + direction) % 360
+    def move_vertical(self, step, dt):
+        self.position[2] += self.movement_speed * step * dt
+
+    def update_direction(self, horizontal_direction, vertical_direction):
+        self.theta = (self.theta + horizontal_direction) % 360
+        self.phi = min(max(self.phi + vertical_direction, -89), 89)
 
     def update_forward_vector(self):
-        self.forward_vector[0] = np.cos(np.radians(self.theta), dtype=np.float32)
-        self.forward_vector[1] = np.sin(np.radians(self.theta), dtype=np.float32)
-        self.forward_vector[2] = 0
+        horizontal_cos = np.cos(np.radians(self.theta), dtype=np.float32)
+        horizontal_sin = np.sin(np.radians(self.theta), dtype=np.float32)
+
+        vertical_cos = np.cos(np.radians(self.phi), dtype=np.float32)
+        vertical_sin = np.sin(np.radians(self.phi), dtype=np.float32)
+
+        self.forward_vector[0] = horizontal_cos * vertical_cos
+        self.forward_vector[1] = horizontal_sin * vertical_cos
+        self.forward_vector[2] = vertical_sin
 
     def get_target_vector(self):
         return self.position + self.forward_vector
