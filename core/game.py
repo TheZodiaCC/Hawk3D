@@ -4,6 +4,8 @@ from core.render.consts import WindowConsts
 from core.consts import GameConsts
 from core.render.display import Display
 from core.game_objects_manager import GameObjectsManager
+from core.input_manager import InputManager
+from core.render.camera import Camera
 
 
 class Game:
@@ -14,12 +16,18 @@ class Game:
         self.clock = pg.time.Clock()
         self.delta_time = 0
 
+        self.camera = None
+
+        self.input_manager = InputManager(self)
         self.objects_manager = GameObjectsManager(self)
 
     def init(self):
         pg.init()
 
         self.display.init()
+
+        self.camera = Camera([0, 0, 1], self.display.shader)
+        self.input_manager.init_mouse_for_camera()
 
         self.is_running = True
 
@@ -32,9 +40,13 @@ class Game:
 
         while self.is_running:
             self.clock.tick(GameConsts.FPS_CAP)
-
             prev_time = self.calculate_delta_time(prev_time)
+
             self.handle_events(pg.event.get())
+            self.input_manager.handle_mouse()
+            self.input_manager.handle_keys()
+
+            self.camera.update_view()
 
             self.objects_manager.update_world_objects()
 
@@ -48,6 +60,9 @@ class Game:
         for event in events:
             if event.type == pg.QUIT:
                 self.is_running = False
+
+            elif event.type == pg.KEYUP:
+                self.input_manager.handle_buttons(event.key)
 
     def calculate_delta_time(self, prev_time):
         now = time.time()
