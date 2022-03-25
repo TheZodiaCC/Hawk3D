@@ -25,8 +25,8 @@ class Display:
         self.window = self.display.set_mode((self.screen_width, self.screen_height), pg.OPENGL|pg.DOUBLEBUF)
         self.display.set_caption(self.display_caption_text)
 
-        self.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 3)
-        self.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 3)
+        self.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 4)
+        self.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 4)
         self.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
 
         GL.glClearColor(0, 0, 0, 1)
