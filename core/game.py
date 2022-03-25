@@ -3,7 +3,7 @@ import time
 from core.render.consts import WindowConsts
 from core.consts import GameConsts
 from core.render.display import Display
-from core.game_modules.game_objects_manager import GameObjectsManager
+from core.game_objects_manager import GameObjectsManager
 
 
 class Game:

@@ -1,4 +1,4 @@
-from core.game_modules.objects.object_base import ObjectBase
+from game_modules.objects.object_base import ObjectBase
 from core.render.objects.cube_mesh import CubeMesh
 
 

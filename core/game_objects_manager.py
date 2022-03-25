@@ -1,4 +1,4 @@
-from core.game_modules.objects.cube import Cube
+from game_modules.objects.cube import Cube
 
 
 class GameObjectsManager:

@@ -41,6 +41,14 @@ class Display:
         self.init_shader()
         self.init_projections()
 
+    def init_shader(self):
+        fragment_data = utils.load_shader(RenderConsts.FRAGMENT_SHADER_DATA_PATH)
+        vertex_data = utils.load_shader(RenderConsts.VERTEX_SHADER_DATA_PATH)
+
+        self.shader = utils.compile_shader(vertex_data, fragment_data)
+
+        GL.glUseProgram(self.shader)
+
     def init_projections(self):
         projection_transform = pyrr.matrix44.create_perspective_projection(
             fovy=45, aspect=self.screen_width / self.screen_height,
@@ -74,11 +82,3 @@ class Display:
 
             GL.glBindVertexArray(object.mesh.vao)
             GL.glDrawArrays(GL.GL_TRIANGLES, 0, object.mesh.vertices_count)
-
-    def init_shader(self):
-        fragment_data = utils.load_shader(RenderConsts.FRAGMENT_SHADER_DATA_PATH)
-        vertex_data = utils.load_shader(RenderConsts.VERTEX_SHADER_DATA_PATH)
-
-        self.shader = utils.compile_shader(vertex_data, fragment_data)
-
-        GL.glUseProgram(self.shader)
