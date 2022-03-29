@@ -1,4 +1,5 @@
 import pygame as pg
+from core.consts import InputConsts
 
 
 class InputManager:
@@ -22,8 +23,8 @@ class InputManager:
             if self.is_mouse_locked:
                 (x, y) = pg.mouse.get_pos()
 
-                camera_vertical_direction = 2 * (self.game.display.screen_height / 2 - y)
-                camera_horizontal_direction = 2 * (self.game.display.screen_width / 2 - x)
+                camera_vertical_direction = InputConsts.MOUSE_SENSITIVITY * (self.game.display.screen_height / 2 - y)
+                camera_horizontal_direction = InputConsts.MOUSE_SENSITIVITY * (self.game.display.screen_width / 2 - x)
 
                 self.game.camera.update_direction(camera_horizontal_direction * self.game.delta_time,
                                                   camera_vertical_direction * self.game.delta_time)
@@ -33,22 +34,22 @@ class InputManager:
     def handle_keys(self):
         key = pg.key.get_pressed()
 
-        if key[pg.K_w]:
+        if key[InputConsts.MOVE_FORWARD_KEY]:
             self.game.camera.move_horizontal(0, self.game.delta_time)
 
-        if key[pg.K_s]:
+        if key[InputConsts.MOVE_BACKWARD_KEY]:
             self.game.camera.move_horizontal(180, self.game.delta_time)
 
-        if key[pg.K_a]:
+        if key[InputConsts.MOVE_LEFT_KEY]:
             self.game.camera.move_horizontal(90, self.game.delta_time)
 
-        if key[pg.K_d]:
+        if key[InputConsts.MOVE_RIGHT_KEY]:
             self.game.camera.move_horizontal(-90, self.game.delta_time)
 
-        if key[pg.K_LSHIFT]:
+        if key[InputConsts.MOVE_UP_KEY]:
             self.game.camera.move_vertical(1, self.game.delta_time)
 
-        if key[pg.K_LCTRL]:
+        if key[InputConsts.MOVE_DOWN_KEY]:
             self.game.camera.move_vertical(-1, self.game.delta_time)
 
     def handle_buttons(self, key):

@@ -46,10 +46,10 @@ class Camera:
     def get_lookat_matrix(self):
         self.update_forward_vector()
 
-        right_vector = pyrr.vector3.cross(self.up_vector, self.forward_vector)
-        up_vector = pyrr.vector3.cross(self.forward_vector, right_vector)
+        # right_vector = pyrr.vector3.cross(self.up_vector, self.forward_vector)
+        # up_vector = pyrr.vector3.cross(self.forward_vector, right_vector)
 
-        return pyrr.matrix44.create_look_at(self.position, self.get_target_vector(), up_vector, dtype=np.float32)
+        return pyrr.matrix44.create_look_at(self.position, self.get_target_vector(), self.up_vector, dtype=np.float32)
 
     def update_view(self):
         GL.glUniformMatrix4fv(GL.glGetUniformLocation(self.shader, "view"), 1, GL.GL_FALSE, self.get_lookat_matrix())
