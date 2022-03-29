@@ -81,4 +81,4 @@ class Display:
             GL.glUniformMatrix4fv(self.model_matrix_location, 1, GL.GL_FALSE, object.mesh.model_transform)
 
             GL.glBindVertexArray(object.mesh.vao)
-            GL.glDrawArrays(GL.GL_TRIANGLES, 0, object.mesh.vertices_count)
+            GL.glDrawArrays(object.mesh.draw_method, 0, object.mesh.vertices_count)

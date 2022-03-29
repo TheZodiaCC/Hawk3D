@@ -36,6 +36,7 @@ class Game:
 
         # Tests
         self.objects_manager.spawn_cube()
+        self.objects_manager.spawn_grid_lines()
         #
 
         while self.is_running:

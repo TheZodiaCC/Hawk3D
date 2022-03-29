@@ -15,6 +15,8 @@ class MeshBase:
 
         self.vertices_count = int(len(self.vertices) / 6)
 
+        self.draw_method = GL.GL_TRIANGLES
+
         self.vao = None
         self.vbo = None
 
