@@ -11,6 +11,10 @@ class ObjectBase:
     def update(self, dt):
         pass
 
+    def set_position(self, position):
+        self.position = position
+        self.mesh.position = position
+
     def rotate(self, dt, rotation_data=None):
         # rotation_data
         # x y z

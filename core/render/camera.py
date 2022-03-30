@@ -41,11 +41,11 @@ class Camera:
         self.forward_vector[2] = vertical_sin
 
     def get_target_vector(self):
+        self.update_forward_vector()
+
         return self.position + self.forward_vector
 
     def get_lookat_matrix(self):
-        self.update_forward_vector()
-
         # right_vector = pyrr.vector3.cross(self.up_vector, self.forward_vector)
         # up_vector = pyrr.vector3.cross(self.forward_vector, right_vector)
 
