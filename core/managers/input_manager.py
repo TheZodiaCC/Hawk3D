@@ -57,3 +57,6 @@ class InputManager:
             self.switch_mouse_lock()
 
             pg.mouse.set_visible(not self.is_mouse_locked)
+
+        if key == InputConsts.DEBUG_MODE_KEY:
+            self.game.debug_manager.switch_debug_mode()

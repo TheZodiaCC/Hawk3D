@@ -14,3 +14,5 @@ class InputConsts:
     MOVE_BACKWARD_KEY = pg.K_s
     MOVE_UP_KEY = pg.K_LSHIFT
     MOVE_DOWN_KEY = pg.K_LCTRL
+
+    DEBUG_MODE_KEY = pg.K_DELETE

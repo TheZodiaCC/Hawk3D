@@ -3,8 +3,9 @@ import time
 from core.render.consts import WindowConsts
 from core.consts import GameConsts
 from core.render.display import Display
-from core.game_objects_manager import GameObjectsManager
-from core.input_manager import InputManager
+from core.managers.game_objects_manager import GameObjectsManager
+from core.managers.input_manager import InputManager
+from core.managers.debug_manager import DebugManager
 from core.render.camera import Camera
 
 
@@ -20,6 +21,7 @@ class Game:
 
         self.input_manager = InputManager(self)
         self.objects_manager = GameObjectsManager(self)
+        self.debug_manager = DebugManager(self)
 
     def init(self):
         pg.init()
@@ -36,7 +38,6 @@ class Game:
 
         # Tests
         self.objects_manager.spawn_cube()
-        self.objects_manager.spawn_grid_lines()
         #
 
         while self.is_running:
